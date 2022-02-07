@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import { UserProvider, useUser } from '../../assets/context/UserContext'
 import Profile from '../../components/Profile/Profile'
 
-const Home = ({ user }) => {
+const Home = () => {
   const [loading, setLoading] = useState(true)
+  const { user } = useUser()
 
   useEffect(() => {
     if (user.name) {
@@ -13,7 +15,11 @@ const Home = ({ user }) => {
   }, [user])
 
   if (loading) return <h1>Loading...</h1>
-  return <Profile user={user} />
+  return (
+    // <UserProvider>
+    <Profile user={user} />
+    // </UserProvider>
+  )
 }
 
 export default Home
